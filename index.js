@@ -123,12 +123,12 @@ const handlers = {
             speech = "In the simplest terms, git pull does a git fetch followed by a git merge. You can do a git fetch at any time to update your remote-tracking branches under refs/remotes/your remote id/.";
         } else if (param === "how do I validate an email address in JavaScript using regex") {
             speech = "Using regular expressions is probably the best way, I'll text you a link to a code snippet now!";
-           /* client.messages
+            twilioclient.messages
                 .create({
                 to: '+15192398181',
                 from: '+12892040756',
                 body: 'Test thing.',
-            }).then((message) => console.log(message.sid)); */
+            }).then((message) => console.log(message.sid));
         } else {
             speech = "Sorry, I couldn't find an answer for the query: " + param;
         }
