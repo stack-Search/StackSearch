@@ -107,7 +107,6 @@ const handlers = {
     // TODO
     'Search': function () {
         const param = this.event.request.intent.slots.stackquery.value;
-<<<<<<< HEAD
         this.response.speak('you searched for ' + param);
         this.emit(':responseReady');
         /*const itemSlot = this.event.request.intent.slots.Item;
@@ -123,10 +122,8 @@ const handlers = {
         if (recipe) {
             this.attributes.speechOutput = recipe;
             this.attributes.repromptSpeech = this.t('RECIPE_REPEAT_MESSAGE');
-=======
         let speech = "";
->>>>>>> 16d4e53106e1c2d9872e76f9df6e1455e8c2bcb0
-
+*/
         if (param === "which equals operator should be used in JavaScript comparisons") {
             speech = "The identity (===) operator behaves identically to the equality (==) operator except no type conversion is done, and the types must be the same to be considered equal.";
         } else if (param === "What is the difference between git pull and git fetch") {
@@ -134,6 +131,12 @@ const handlers = {
         } else {
             speech = "Sorry, I couldn't find an answer for the query: " + param;
         }
+        jsonapi(param, function(data) {
+            var fs = require('fs');
+            fs.writeFile('./data.json',JSON.stringify(data,null,2));
+            var spawn = require("child_process").spawn;
+            var pythonProcess = spawn('python', ["./summary.py", JSON.stringify(data, null, 2)]);
+        })
         this.response.speak(speech);
         this.emit(':responseReady');
     },
