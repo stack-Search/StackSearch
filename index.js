@@ -107,25 +107,7 @@ const handlers = {
     // TODO
     'Search': function () {
         const param = this.event.request.intent.slots.stackquery.value;
-<<<<<<< HEAD
-        this.response.speak('you searched for ' + param);
-        this.emit(':responseReady');
-        /*const itemSlot = this.event.request.intent.slots.Item;
-        let itemName;
-        if (itemSlot && itemSlot.value) {
-            itemName = itemSlot.value.toLowerCase();
-        }
-
-        const cardTitle = this.t('DISPLAY_CARD_TITLE', this.t('SKILL_NAME'), itemName);
-        const myRecipes = this.t('RECIPES');
-        const recipe = myRecipes[itemName];
-
-        if (recipe) {
-            this.attributes.speechOutput = recipe;
-            this.attributes.repromptSpeech = this.t('RECIPE_REPEAT_MESSAGE');
-=======
         let speech = "";
->>>>>>> 16d4e53106e1c2d9872e76f9df6e1455e8c2bcb0
 
         if (param === "which equals operator should be used in JavaScript comparisons") {
             speech = "The identity (===) operator behaves identically to the equality (==) operator except no type conversion is done, and the types must be the same to be considered equal.";
