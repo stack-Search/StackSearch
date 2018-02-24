@@ -35,14 +35,9 @@ const handlers = {
     },
     // TODO
     'Search': function () {
-<<<<<<< HEAD:Lambda_Func.js
-        console.log("CALLED!")
-=======
-        
         const param = this.event.request.intent.slots.stackquery.value;
         this.response.speak('you searched for ' + param);
         this.emit(':responseReady');
->>>>>>> 3fd01296e22bd32baeabae49e18e1f37d1e2a727:index.js
         /*const itemSlot = this.event.request.intent.slots.Item;
         let itemName;
         if (itemSlot && itemSlot.value) {
