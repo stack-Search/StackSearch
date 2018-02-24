@@ -107,27 +107,13 @@ const handlers = {
     // TODO
     'Search': function () {
         const param = this.event.request.intent.slots.stackquery.value;
-        this.response.speak('you searched for ' + param);
-        this.emit(':responseReady');
-        /*const itemSlot = this.event.request.intent.slots.Item;
-        let itemName;
-        if (itemSlot && itemSlot.value) {
-            itemName = itemSlot.value.toLowerCase();
-        }
-
-        const cardTitle = this.t('DISPLAY_CARD_TITLE', this.t('SKILL_NAME'), itemName);
-        const myRecipes = this.t('RECIPES');
-        const recipe = myRecipes[itemName];
-
-        if (recipe) {
-            this.attributes.speechOutput = recipe;
-            this.attributes.repromptSpeech = this.t('RECIPE_REPEAT_MESSAGE');
-        let speech = "";
-*/
         if (param === "which equals operator should be used in JavaScript comparisons") {
             speech = "The identity (===) operator behaves identically to the equality (==) operator except no type conversion is done, and the types must be the same to be considered equal.";
-        } else if (param === "What is the difference between git pull and git fetch") {
-            speech = "In the simplest terms, git pull does a git fetch followed by a git merge. You can do a git fetch at any time to update your remote-tracking branches under refs/remotes/<remote>/.";
+        } else if (param === "what is the difference between git pull and git fetch") {
+            speech = "In the simplest terms, git pull does a git fetch followed by a git merge. You can do a git fetch at any time to update your remote-tracking branches under refs/remotes/your remote id/.";
+        } else if (param === "how do I validate an email address in JavaScript using regex") {
+            speech = "Using regular expressions is probably the best way, I'll text you a link to a code snippet now!";
+            // TODO TEXT THE PERSON
         } else {
             speech = "Sorry, I couldn't find an answer for the query: " + param;
         }
@@ -136,7 +122,7 @@ const handlers = {
             fs.writeFile('./data.json',JSON.stringify(data,null,2));
             var spawn = require("child_process").spawn;
             var pythonProcess = spawn('python', ["./summary.py", JSON.stringify(data, null, 2)]);
-        })
+        });
         this.response.speak(speech);
         this.emit(':responseReady');
     },
