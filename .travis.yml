@@ -1,7 +1,7 @@
 language: node_js
 node_js:
 - '7'
-script: node Lambda_Func.js
+script: node index.js
 cache:
   directories:
   - node_modules
