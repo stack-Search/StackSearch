@@ -3,6 +3,10 @@
 const Alexa = require('alexa-sdk');
 const stackexchange = require('stackexchange-node')
 const aws = require('aws-sdk');
+const twilio_auth_token = 'dedfda4265cc7e3ebd890ce445a7901b'; // is only trial do not worry I know I shouldn't do this
+const twilio_account_sid = 'AC9af3f2128ddb812932a55bf062bd1ce4';
+const twilioclient = require('twilio')(twilio_account_sid, twilio_auth_token);
+
 var lambda = new aws.Lambda({
     region: 'us-east-1'
 });
@@ -120,7 +124,12 @@ const handlers = {
             speech = "In the simplest terms, git pull does a git fetch followed by a git merge. You can do a git fetch at any time to update your remote-tracking branches under refs/remotes/your remote id/.";
         } else if (param === "how do I validate an email address in JavaScript using regex") {
             speech = "Using regular expressions is probably the best way, I'll text you a link to a code snippet now!";
-            // TODO TEXT THE PERSON
+            client.messages
+                .create({
+                to: '+15192398181',
+                from: '+12892040756',
+                body: 'Test thing.',
+            }).then((message) => console.log(message.sid));
         } else {
             speech = "Sorry, I couldn't find an answer for the query: " + param;
         }
