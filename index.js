@@ -111,11 +111,15 @@ const handlers = {
 
         if (param === "which equals operator should be used in JavaScript comparisons") {
             speech = "The identity (===) operator behaves identically to the equality (==) operator except no type conversion is done, and the types must be the same to be considered equal.";
-        } else if (param === "What is the difference between git pull and git fetch") {
-            speech = "In the simplest terms, git pull does a git fetch followed by a git merge. You can do a git fetch at any time to update your remote-tracking branches under refs/remotes/<remote>/.";
+        } else if (param === "what is the difference between git pull and git fetch") {
+            speech = "In the simplest terms, git pull does a git fetch followed by a git merge. You can do a git fetch at any time to update your remote-tracking branches under refs/remotes/your remote id/.";
+        } else if (param === "how do I validate an email address in JavaScript using regex") {
+            speech = "Using regular expressions is probably the best way, I'll text you a link to a code snippet now!";
+            // TODO TEXT THE PERSON
         } else {
             speech = "Sorry, I couldn't find an answer for the query: " + param;
         }
+        
         this.response.speak(speech);
         this.emit(':responseReady');
     },
