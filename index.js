@@ -135,6 +135,7 @@ const handlers = {
         } else {
             speech = "Sorry, I couldn't find an answer for the query: " + param;
         }
+
         /* this is temproary
         jsonapi('sort array in javascript', function (data){
             //console.log(data.concept[0]);
@@ -146,12 +147,12 @@ const handlers = {
         };
         
 
-  PythonShell.run('summary.py', options, function (err, results) {
-  if (err) throw err;
-  // results is an array consisting of messages collected during execution
-  console.log(results);
-  });
-  });*/
+        PythonShell.run('summary.py', options, function (err, results) {
+        if (err) throw err;
+        // results is an array consisting of messages collected during execution
+        console.log(results);
+        });
+        });*/
         this.response.speak(speech);
         this.emit(':responseReady');
     },
