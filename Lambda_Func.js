@@ -7,7 +7,6 @@ const APP_ID = "amzn1.ask.skill.773968b1-1359-4506-80ce-4217a46dad68"; // TODO r
 const languageStrings = {
     'en': {
         translation: {
-            RECIPES: recipes.RECIPE_EN_US,
             // TODO: Update these messages to customize.
             SKILL_NAME: 'Stack Search',
             WELCOME_MESSAGE: "Welcome to %s. You can ask a question like, what\'s blockchain? ... Now, what can I help you with?",
