@@ -1,16 +1,16 @@
-function jsonapi (search){
+function jsonapi (search, callback){
 	var stackexchange = require('stackexchange-node');
 	var options = { version: 2.2 };
 	var context = new stackexchange(options);
 	var re=/<code>([\s\S]*?)<\/code>/gm;
 	var re2=/<(.*?)>/g;
 	var m;
-	var complete = {
-		concept: [],
-		code: [],
-		title: '',
-		is_code: false
-	};
+  var complete = {
+    concept: [],
+    code: [],
+    title: '',
+    is_code: false
+  };
 	var filter = {
   		pagesize: 1,
   		sort: 'relevance',
@@ -18,7 +18,7 @@ function jsonapi (search){
   		intitle: search,
   		filter: '!)R7_Ydm-Q.9X4okybbXBoVz5'
 	};
-	context.search.search(filter, function(err, results){
+	context.search.search(filter, function (err, results){
   	if (err) throw err;
   	var s=results.items[0].answers[0].body;
   	complete.title=results.items[0].title;
@@ -36,8 +36,13 @@ function jsonapi (search){
   		while(re2.test(complete.concept[i])){
   			complete.concept[i]=complete.concept[i].replace(re2,"");
   		}
+      while(/\n|\r/g.test(complete.concept[i])){
+        complete.concept[i]=complete.concept[i].replace(/\n|\r/g,"");
+      }
   	}
-  	return complete;
+    callback(complete);
 });
 }
-jsonapi('sort array in javascript');
+jsonapi('sort array in javascript', function (data){
+  console.log(data);
+});
