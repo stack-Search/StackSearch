@@ -35,48 +35,9 @@ const handlers = {
     },
     // TODO
     'Search': function () {
-<<<<<<< HEAD:Lambda_Func.js
-        console.log("CALLED!")
-=======
-        
         const param = this.event.request.intent.slots.stackquery.value;
         this.response.speak('you searched for ' + param);
         this.emit(':responseReady');
->>>>>>> 3fd01296e22bd32baeabae49e18e1f37d1e2a727:index.js
-        /*const itemSlot = this.event.request.intent.slots.Item;
-        let itemName;
-        if (itemSlot && itemSlot.value) {
-            itemName = itemSlot.value.toLowerCase();
-        }
-
-        const cardTitle = this.t('DISPLAY_CARD_TITLE', this.t('SKILL_NAME'), itemName);
-        const myRecipes = this.t('RECIPES');
-        const recipe = myRecipes[itemName];
-
-        if (recipe) {
-            this.attributes.speechOutput = recipe;
-            this.attributes.repromptSpeech = this.t('RECIPE_REPEAT_MESSAGE');
-
-            this.response.speak(recipe).listen(this.attributes.repromptSpeech);
-            this.response.cardRenderer(cardTitle, recipe);
-            this.emit(':responseReady');
-        } else {
-            let speechOutput = this.t('RECIPE_NOT_FOUND_MESSAGE');
-            const repromptSpeech = this.t('RECIPE_NOT_FOUND_REPROMPT');
-            if (itemName) {
-                speechOutput += this.t('RECIPE_NOT_FOUND_WITH_ITEM_NAME', itemName);
-            } else {
-                speechOutput += this.t('RECIPE_NOT_FOUND_WITHOUT_ITEM_NAME');
-            }
-            speechOutput += repromptSpeech;
-
-            this.attributes.speechOutput = speechOutput;
-            this.attributes.repromptSpeech = repromptSpeech;
-
-            this.response.speak(speechOutput).listen(repromptSpeech);
-            this.emit(':responseReady');
-        }
-        */
     },
     'AMAZON.HelpIntent': function () {
         this.attributes.speechOutput = this.t('HELP_MESSAGE');
