@@ -35,7 +35,7 @@ const handlers = {
     },
     // TODO
     'Search': function () {
-        
+        this.response.speechOutput = this.t('haha');
         /*const itemSlot = this.event.request.intent.slots.Item;
         let itemName;
         if (itemSlot && itemSlot.value) {
