@@ -126,7 +126,24 @@ function getColorFromSession(intent, session, callback) {
     callback(sessionAttributes,
          buildSpeechletResponse(intent.name, speechOutput, repromptText, shouldEndSession));
 }
+*/
 
+// TODO add this
+function search(intent, session, callback) {
+    const cardTitle = intent.name;
+    const query = intent.slots.stackquery.value;
+    const shouldEndSession = false;
+    const repromptText = null;
+        // Logs search text.
+    console.log("user searched for " + query);
+
+    // run the overflow.js function here and somehow make sure it executes properly
+    // const speechOutput = response from overflow.js
+    const speechOutput = "yes"; // placeholder
+
+    callback({},
+        buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
+}
 
 // --------------- Events -----------------------
 
@@ -159,16 +176,7 @@ function onIntent(intentRequest, session, callback) {
 
     // Dispatch to your skill's intent handler
     if (intentName === 'Search') {
-        // Logs search text.
-        console.log("user searched for " + searchValue);
-        const cardTitle = 'Searching...';
-        const speechOutput = 'You were searching for. ' +
-            searchValue;
-        // If the user either does not reply to the welcome message or says something that is not
-        // understood, they will be prompted again with this text.
-        const repromptText = 'Did you find what you were looking for?';
-        callback({},
-            buildSpeechletResponse(cardTitle, speechOutput, repromptText, false));
+        search(intent, callback, session);
     } else if (intentName === 'AMAZON.HelpIntent') {
         getWelcomeResponse(callback);
     } else if (intentName === 'AMAZON.StopIntent' || intentName === 'AMAZON.CancelIntent') {
