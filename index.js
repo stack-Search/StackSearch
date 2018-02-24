@@ -1,10 +1,13 @@
 'use strict';
 
+<<<<<<< HEAD
 var twilio = require('twilio');
 var accountSid = 'AC38758e1348e016394b93c77e680a7bb4'; // Your Account SID from www.twilio.com/console
 var authToken = '13bb8915fd9892d9fbd15b21a589a8ca';   // Your Auth Token from www.twilio.com/console
 var client = new twilio(accountSid, authToken);
 
+=======
+>>>>>>> 4d944a146e2023af4894187a4e0d95d2db2315fa
 const Alexa = require('alexa-sdk');
 const stackexchange = require('stackexchange-node')
 const aws = require('aws-sdk');
@@ -133,11 +136,15 @@ const handlers = {
                 .create({
                 to: '+15192398181',
                 from: '+12892040756',
-                body: 'Test thing.',
+                body: ```'function validateEmail(email) {
+                    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                    return re.test(String(email).toLowerCase());
+                }```,
             }).then((message) => console.log(message.sid));
         } else {
             speech = "Sorry, I couldn't find an answer for the query: " + param;
         }
+<<<<<<< HEAD
         */
 
         jsonapi(param, function (data) {
@@ -156,6 +163,26 @@ const handlers = {
             });
         });
 
+=======
+
+        /* this is temproary
+        jsonapi('sort array in javascript', function (data){
+            //console.log(data.concept[0]);
+            var PythonShell = require('python-shell');
+            var options = {
+            mode: 'text',
+            scriptPath: './',
+            args: data.concept
+        };
+        
+
+        PythonShell.run('summary.py', options, function (err, results) {
+        if (err) throw err;
+        // results is an array consisting of messages collected during execution
+        console.log(results);
+        });
+        });*/
+>>>>>>> 4d944a146e2023af4894187a4e0d95d2db2315fa
         this.response.speak(speech);
         this.emit(':responseReady');
     },
