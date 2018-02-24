@@ -10,7 +10,7 @@ deploy:
   function_name: stack_search
   region: us-east-1
   role: arn:aws:iam::784849208592:role/TravisDeploy
-  runtime: nodejs4.3
+  runtime: nodejs6.10
   handler_name: handler
   access_key_id: AKIAJSPVXGCIC3HVRH6Q
   secret_access_key:
