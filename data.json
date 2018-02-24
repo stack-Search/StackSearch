@@ -1,0 +1,14 @@
+{
+    "concept": [
+        "String1",
+        "String2",
+        "String3"       
+    ],
+    "code": [
+        "String1",
+        "String2",
+        "String3"
+    ],
+    "Title": "What is a neural network?",
+    "is_code?": false
+}
