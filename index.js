@@ -111,7 +111,7 @@ const handlers = {
         // TODO actually search param
         // TODO actually summarize param
 
-        if (param == "which equals operator should be used in javascript comparisons") {
+        if (param == "which equals operator should be used in JavaScript comparisons") {
             speech = "The identity (===) operator behaves identically to the equality (==) operator except no type conversion is done, and the types must be the same to be considered equal."
         } else {
             speech = "Sorry, I couldn't find an answer for " + param;
