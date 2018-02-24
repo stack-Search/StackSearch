@@ -1,0 +1,19 @@
+language: node_js
+node_js:
+  - "iojs"
+  - "7"
+cache:
+  directories:
+    - "node_modules"
+
+deploy:
+  provider: lambda
+  function_name: "stack_search"
+  region: "us-east-2"
+  role: "arn:aws:lambda:us-east-2:784849208592:function:stack_search"
+  runtime: "nodejs4.3"
+  handler_name: "handler"
+  access_key_id: "AKIAJSPVXGCIC3HVRH6Q"
+  secret_access_key: "AWS SECRET ACCESS KEY"
+  on:
+    branch: master
