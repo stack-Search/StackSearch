@@ -2,7 +2,7 @@ from textteaser import TextTeaser
 import json
 #Assuming a JSON string is passed into the event variable
 def summary(event, context):
-	tt = textteaser()
+	tt = TextTeaser()
 	arr = json.loads(event)
 	summ_str = ""
 	code = []
