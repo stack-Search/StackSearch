@@ -8,7 +8,8 @@
     "aws-sdk": "^2.202.0",
     "stackexchange": "^0.4.0",
     "stackexchange-node": "^1.0.1",
-    "travis-encrypt": "github:pwmckenna/node-travis-encrypt"
+    "travis-encrypt": "github:pwmckenna/node-travis-encrypt",
+    "twilio": "^3.11.3"
   },
   "devDependencies": {},
   "scripts": {

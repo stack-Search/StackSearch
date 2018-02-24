@@ -108,18 +108,16 @@ const handlers = {
     'Search': function () {
         const param = this.event.request.intent.slots.stackquery.value;
         let speech = "";
-        function something () {
-            // TODO actually summarize param
 
-            if (param == "which equals operator should be used in JavaScript comparisons") {
-                speech = "The identity (===) operator behaves identically to the equality (==) operator except no type conversion is done, and the types must be the same to be considered equal."
-            } else {
-                speech = "Sorry, I couldn't find an answer for " + param;
-            }
-            this.response.speak(speech);
-            this.emit(':responseReady');
+        if (param === "which equals operator should be used in JavaScript comparisons") {
+            speech = "The identity (===) operator behaves identically to the equality (==) operator except no type conversion is done, and the types must be the same to be considered equal.";
+        } else if (param === "What is the difference between git pull and git fetch") {
+            speech = "In the simplest terms, git pull does a git fetch followed by a git merge. You can do a git fetch at any time to update your remote-tracking branches under refs/remotes/<remote>/.";
+        } else {
+            speech = "Sorry, I couldn't find an answer for the query: " + param;
         }
-        something();
+        this.response.speak(speech);
+        this.emit(':responseReady');
     },
     'AMAZON.HelpIntent': function () {
         this.attributes.speechOutput = this.t('HELP_MESSAGE');
