@@ -35,7 +35,7 @@ const handlers = {
     },
     // TODO
     'Search': function () {
-        
+        console.log("CALLED!")
         /*const itemSlot = this.event.request.intent.slots.Item;
         let itemName;
         if (itemSlot && itemSlot.value) {
