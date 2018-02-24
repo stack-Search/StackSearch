@@ -1,5 +1,18 @@
 'use strict';
 
+var twilio = require('twilio');
+var accountSid = 'AC38758e1348e016394b93c77e680a7bb4'; // Your Account SID from www.twilio.com/console
+var authToken = '13bb8915fd9892d9fbd15b21a589a8ca';   // Your Auth Token from www.twilio.com/console
+var client = new twilio(accountSid, authToken);
+
+client.messages.create({
+    body: 'Hello from Node',
+    to: '+12345678901',  // Text this number
+    from: '+12345678901' // From a valid Twilio number
+})
+.then((message) => console.log(message.sid));
+
+
 const Alexa = require('alexa-sdk');
 const stackexchange = require('stackexchange-node')
 const aws = require('aws-sdk');
