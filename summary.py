@@ -1,17 +1,11 @@
 from textteaser import TextTeaser
 import json
-#Assuming a JSON string is passed into the event variable
-def summary(event, context):
-	tt = TextTeaser()
-	arr = json.loads(event)
-	summ_str = ""
-	code = []
-	strings = []
-	counter = 0
-	for a in arr[0]:
-		#Assuming arr[2] is the title
-		summ_str = tt.summarize(arr[2], a)
-		strings.append(str(counter))
-		strings.append(summ_str)
-		counter += 1
-	return dict(zip(strings[::2], strings[1::2]))
+
+data = json.load(open('data.json'))
+tt = TextTeaser()
+for a in data["concept"]:
+	#Assuming arr[2] is the title
+	a = tt.summarize(data["Title"], a)
+#str_dict = dict(zip(strings[::2], strings[1::2]))
+with open('data.json', 'w') as f:
+	json.dump(data, f, ensure_ascii=False)
