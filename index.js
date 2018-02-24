@@ -107,6 +107,15 @@ const handlers = {
     // TODO
     'Search': function () {
         const param = this.event.request.intent.slots.stackquery.value;
+<<<<<<< HEAD
+=======
+        let speech = "";
+
+        // TODO SEARCH
+        // TODO SUMMARIZE
+
+        // HARDCODED
+>>>>>>> 13420d9f8494e30b151b58297b8d5614f9012155
         if (param === "which equals operator should be used in JavaScript comparisons") {
             speech = "The identity (===) operator behaves identically to the equality (==) operator except no type conversion is done, and the types must be the same to be considered equal.";
         } else if (param === "what is the difference between git pull and git fetch") {
