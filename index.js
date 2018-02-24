@@ -35,7 +35,9 @@ const handlers = {
     },
     // TODO
     'Search': function () {
-        this.response.speak('this is a test to see if the function is called');
+        
+        const param = this.event.request.intent.slots.stackquery.value;
+        this.response.speak('you searched for %s', param);
         this.emit(':responseReady');
         /*const itemSlot = this.event.request.intent.slots.Item;
         let itemName;
