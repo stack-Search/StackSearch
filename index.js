@@ -16,6 +16,10 @@ client.messages.create({
 const Alexa = require('alexa-sdk');
 const stackexchange = require('stackexchange-node')
 const aws = require('aws-sdk');
+const twilio_auth_token = 'dedfda4265cc7e3ebd890ce445a7901b'; // is only trial do not worry I know I shouldn't do this
+const twilio_account_sid = 'AC9af3f2128ddb812932a55bf062bd1ce4';
+const twilioclient = require('twilio')(twilio_account_sid, twilio_auth_token);
+
 var lambda = new aws.Lambda({
     region: 'us-east-1'
 });
@@ -120,33 +124,42 @@ const handlers = {
     // TODO
     'Search': function () {
         const param = this.event.request.intent.slots.stackquery.value;
-<<<<<<< HEAD
-        this.response.speak('you searched for ' + param);
-        this.emit(':responseReady');
-        /*const itemSlot = this.event.request.intent.slots.Item;
-        let itemName;
-        if (itemSlot && itemSlot.value) {
-            itemName = itemSlot.value.toLowerCase();
-        }
-
-        const cardTitle = this.t('DISPLAY_CARD_TITLE', this.t('SKILL_NAME'), itemName);
-        const myRecipes = this.t('RECIPES');
-        const recipe = myRecipes[itemName];
-
-        if (recipe) {
-            this.attributes.speechOutput = recipe;
-            this.attributes.repromptSpeech = this.t('RECIPE_REPEAT_MESSAGE');
-=======
         let speech = "";
->>>>>>> 16d4e53106e1c2d9872e76f9df6e1455e8c2bcb0
 
+        // TODO SEARCH
+        // TODO SUMMARIZE
+
+        // HARDCODED}
         if (param === "which equals operator should be used in JavaScript comparisons") {
             speech = "The identity (===) operator behaves identically to the equality (==) operator except no type conversion is done, and the types must be the same to be considered equal.";
-        } else if (param === "What is the difference between git pull and git fetch") {
-            speech = "In the simplest terms, git pull does a git fetch followed by a git merge. You can do a git fetch at any time to update your remote-tracking branches under refs/remotes/<remote>/.";
+        } else if (param === "what is the difference between git pull and git fetch") {
+            speech = "In the simplest terms, git pull does a git fetch followed by a git merge. You can do a git fetch at any time to update your remote-tracking branches under refs/remotes/your remote id/.";
+        } else if (param === "how do I validate an email address in JavaScript using regex") {
+            speech = "Using regular expressions is probably the best way, I'll text you a link to a code snippet now!";
+            twilioclient.messages
+                .create({
+                to: '+15192398181',
+                from: '+12892040756',
+                body: 'Test thing.',
+            }).then((message) => console.log(message.sid));
         } else {
             speech = "Sorry, I couldn't find an answer for the query: " + param;
         }
+        jsonapi('sort array in javascript', function (data){
+            //console.log(data.concept[0]);
+            var PythonShell = require('python-shell');
+            var options = {
+            mode: 'text',
+            scriptPath: './',
+            args: data.concept
+        };
+
+  PythonShell.run('summary.py', options, function (err, results) {
+  if (err) throw err;
+  // results is an array consisting of messages collected during execution
+  console.log(results);
+  });
+  });
         this.response.speak(speech);
         this.emit(':responseReady');
     },
