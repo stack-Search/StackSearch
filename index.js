@@ -132,13 +132,14 @@ const handlers = {
         } else {
             speech = "Sorry, I couldn't find an answer for the query: " + param;
         }
-
+        /*
         jsonapi(param, function(data) {
             var fs = require('fs');
             fs.writeFile('./data.json',JSON.stringify(data,null,2));
             var spawn = require("child_process").spawn;
             var pythonProcess = spawn('python', ["./summary.py", JSON.stringify(data, null, 2)]);
         });
+        */
         this.response.speak(speech);
         this.emit(':responseReady');
     },
