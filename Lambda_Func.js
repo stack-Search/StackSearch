@@ -53,7 +53,7 @@ function buildResponse(sessionAttributes, speechletResponse) {
 function getWelcomeResponse(callback) {
     // If we wanted to initialize the session to have some attributes we could add those here.
     const sessionAttributes = {};
-    const cardTitle = 'StackSearch';
+    const cardTitle = 'Welcome';
     const speechOutput = 'Welcome to StackSearch. ' +
         'What would you like to search on StackOverflow?';
     // If the user either does not reply to the welcome message or says something that is not
@@ -69,7 +69,7 @@ function getWelcomeResponse(callback) {
 
 function handleSessionEndRequest(callback) {
     const cardTitle = 'Session Ended';
-    const speechOutput = 'Thank you for trying the Alexa Skills Kit sample. Have a nice day!';
+    const speechOutput = 'Thank you for using StackSearch.';
     // Setting this to true ends the session and exits the skill.
     const shouldEndSession = true;
 
@@ -155,13 +155,20 @@ function onIntent(intentRequest, session, callback) {
 
     const intent = intentRequest.intent;
     const intentName = intentRequest.intent.name;
-    const searchValue = intentRequest.intent.slots.stackquery.value;
+    const searchValue = intent.slots.stackquery.value;
 
     // Dispatch to your skill's intent handler
     if (intentName === 'Search') {
         // Logs search text.
         console.log("user searched for " + searchValue);
-        //search(intent, session, callback);
+        const cardTitle = 'Searching...';
+        const speechOutput = 'You were searching for. ' +
+            searchValue;
+        // If the user either does not reply to the welcome message or says something that is not
+        // understood, they will be prompted again with this text.
+        const repromptText = 'Did you find what you were looking for?';
+        callback({},
+            buildSpeechletResponse(cardTitle, speechOutput, repromptText, false));
     } else if (intentName === 'AMAZON.HelpIntent') {
         getWelcomeResponse(callback);
     } else if (intentName === 'AMAZON.StopIntent' || intentName === 'AMAZON.CancelIntent') {
