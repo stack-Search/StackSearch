@@ -138,21 +138,21 @@ const handlers = {
 
         /* this is temproary
         jsonapi('sort array in javascript', function (data){
-            //console.log(data.concept[0]);
-            var PythonShell = require('python-shell');
-            var options = {
-            mode: 'text',
-            scriptPath: './',
-            args: data.concept
-        };
-        
+    //console.log(data.concept);
+    data.concept.unshift(data.title);
+    var PythonShell = require('python-shell');
+    var options = {
+    mode: 'text',
+    scriptPath: './',
+    args: data.concept
+    };
 
-        PythonShell.run('summary.py', options, function (err, results) {
-        if (err) throw err;
-        // results is an array consisting of messages collected during execution
-        console.log(results);
-        });
-        });*/
+    PythonShell.run('summary.py', options, function (err, results) {
+    if (err) throw err;
+    // results is an array consisting of messages collected during execution
+    console.log(results);
+    });
+    });*/
         this.response.speak(speech);
         this.emit(':responseReady');
     },
