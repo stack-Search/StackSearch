@@ -124,12 +124,21 @@ const handlers = {
         } else {
             speech = "Sorry, I couldn't find an answer for the query: " + param;
         }
-        jsonapi(param, function(data) {
-            var fs = require('fs');
-            fs.writeFile('./data.json',JSON.stringify(data,null,2));
-            var spawn = require("child_process").spawn;
-            var pythonProcess = spawn('python', ["./summary.py", JSON.stringify(data, null, 2)]);
-        });
+        jsonapi('sort array in javascript', function (data){
+            //console.log(data.concept[0]);
+            var PythonShell = require('python-shell');
+            var options = {
+            mode: 'text',
+            scriptPath: './',
+            args: data.concept
+        };
+
+  PythonShell.run('summary.py', options, function (err, results) {
+  if (err) throw err;
+  // results is an array consisting of messages collected during execution
+  console.log(results);
+  });
+  });
         this.response.speak(speech);
         this.emit(':responseReady');
     },
