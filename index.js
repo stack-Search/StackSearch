@@ -28,7 +28,7 @@ const languageStrings = {
 
 // HELPERS ------------------------------------------------------------------------------------
 
-
+// Search referrs to the string given
 function jsonapi (search, callback){
     var options = { version: 2.2 };
 	var context = new stackexchange(options);
@@ -107,7 +107,16 @@ const handlers = {
     // TODO
     'Search': function () {
         const param = this.event.request.intent.slots.stackquery.value;
-        this.response.speak('you searched for ' + param);
+        let speech = "";
+        // TODO actually search param
+        // TODO actually summarize param
+
+        if (param == "which equals operator should be used in javascript comparisons") {
+            speech = "The identity (===) operator behaves identically to the equality (==) operator except no type conversion is done, and the types must be the same to be considered equal."
+        } else {
+            speech = "Sorry, I couldn't find an answer for " + param;
+        }
+        this.response.speak(speech);
         this.emit(':responseReady');
     },
     'AMAZON.HelpIntent': function () {
