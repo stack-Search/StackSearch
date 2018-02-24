@@ -51,5 +51,6 @@ function jsonapi (search, callback){
 });
 }
 jsonapi('sort array in javascript', function (data){
-  console.log(data);
+  var fs = require('fs');
+  fs.writeFile('./data.json',JSON.stringify(data,null,2));
 });
