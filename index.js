@@ -144,8 +144,10 @@ const handlers = {
         }
         */
 
+        //this is temproary
         jsonapi(param, function (data) {
-            //console.log(data.concept[0]);
+            //console.log(data.concept);
+            data.concept.unshift(data.title);
             var PythonShell = require('python-shell');
             var options = {
                 mode: 'text',
@@ -160,43 +162,11 @@ const handlers = {
             });
         });
 
-
-        /* this is temproary
-        jsonapi('sort array in javascript', function (data){
-    //console.log(data.concept);
-    data.concept.unshift(data.title);
-    var PythonShell = require('python-shell');
-    var options = {
-    mode: 'text',
-    scriptPath: './',
-    args: data.concept
-    };
-
-    PythonShell.run('summary.py', options, function (err, results) {
-    if (err) throw err;
-    // results is an array consisting of messages collected during execution
-    console.log(results);
-    });
-    });*/
-
-            //console.log(data.concept[0]);
-            var PythonShell = require('python-shell');
-            var options = {
-            mode: 'text',
-            scriptPath: './',
-            args: data.concept
-        };
-        
-
-        PythonShell.run('summary.py', options, function (err, results) {
-        if (err) throw err;
-        // results is an array consisting of messages collected during execution
-        console.log(results);
-        });
-        });
+        //console.log(data.concept[0]);
         this.response.speak(speech);
         this.emit(':responseReady');
     },
+    
     'AMAZON.HelpIntent': function () {
         this.attributes.speechOutput = this.t('HELP_MESSAGE');
         this.attributes.repromptSpeech = this.t('HELP_REPROMPT');
