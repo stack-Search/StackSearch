@@ -32,7 +32,6 @@ const languageStrings = {
 
 // Search refers to the string given
 function jsonapi (search, callback){
-    console.log(search);
     var options = { version: 2.2 };
 	var context = new stackexchange(options);
 	var re=/<pre><code>([\s\S]*?)<\/code><\/pre>/gm;
@@ -125,7 +124,7 @@ const handlers = {
         // TODO SUMMARIZE
 
         // HARDCODED}
-        
+        /*
         if (param === "which equals operator should be used in JavaScript comparisons") {
             speech = "The identity (===) operator behaves identically to the equality (==) operator except no type conversion is done, and the types must be the same to be considered equal.";
         } else if (param === "what is the difference between git pull and git fetch") {
@@ -141,12 +140,15 @@ const handlers = {
                     return re.test(String(email).toLowerCase());
                 }```,
             }).then((message) => console.log(message.sid));
+        } else {
+            speech = "Sorry, I couldn't find an answer for the query: " + param;
         }
+        */
 
         //this is temproary
         jsonapi(param, function (data) {
             //console.log(data.concept);
-            data.concept.unshift(data.title);
+            /*data.concept.unshift(data.title);
             var PythonShell = require('python-shell');
             var options = {
                 mode: 'text',
@@ -158,12 +160,15 @@ const handlers = {
                 if (err) throw err;
                 // results is an array consisting of messages collected during execution
                 console.log(results);
-            });
+            });*/
+        var string = data.concept.join(" ");
+        this.response.speak(string);
+        this.emit(':responseReady');
         });
 
         //console.log(data.concept[0]);
-        this.response.speak(speech);
-        this.emit(':responseReady');
+        /*this.response.speak(speech);
+        this.emit(':responseReady');*/
     },
     
     'AMAZON.HelpIntent': function () {
