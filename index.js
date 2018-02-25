@@ -180,7 +180,7 @@ const handlers = {
         this.emit(':responseReady');*/
         
         // if predefined, we exit early
-         i//f (param != "") {
+         //f (param != "") {
             // this.response.speak(speech);
              //this.emit(':responseReady');
              //return; 
