@@ -8,7 +8,7 @@ const twilio_auth_token = 'dedfda4265cc7e3ebd890ce445a7901b'; // is only trial d
 const twilio_account_sid = 'AC9af3f2128ddb812932a55bf062bd1ce4';
 const twilioclient = require('twilio')(twilio_account_sid, twilio_auth_token);
 const deepai_api_key = 'e4402912-b41b-42af-8a76-356f798986c6'; // is also free-tier and as such we do not require this in the future.
-const request = require('request');
+//const request = require('request');
 
 const APP_ID = "amzn1.ask.skill.773968b1-1359-4506-80ce-4217a46dad68"; // TODO replace with your app ID (OPTIONAL).
 
@@ -120,12 +120,11 @@ const handlers = {
     'Search': function () {
         const param = this.event.request.intent.slots.stackquery.value;
         let speech = "";
-
         // TODO SEARCH
         // TODO SUMMARIZE
 
         // HARDCODED}
-        /*
+        
         if (param === "which equals operator should be used in JavaScript comparisons") {
             speech = "The identity (===) operator behaves identically to the equality (==) operator except no type conversion is done, and the types must be the same to be considered equal.";
         } else if (param === "what is the difference between git pull and git fetch") {
@@ -141,35 +140,20 @@ const handlers = {
                     return re.test(String(email).toLowerCase());
                 }```,
             }).then((message) => console.log(message.sid));
-        } else {
-            speech = "Sorry, I couldn't find an answer for the query: " + param;
         }
-        */
-
-        //this is temproary
+          //this is temproary
         jsonapi(param, function (data) {
-            //console.log(data.concept);
-            /*data.concept.unshift(data.title);
-            var PythonShell = require('python-shell');
-            var options = {
-                mode: 'text',
-                scriptPath: './',
-                args: data.concept
-            };
-
-            PythonShell.run('summary.py', options, function (err, results) {
-                if (err) throw err;
-                // results is an array consisting of messages collected during execution
-                console.log(results);
-            });*/
-        var string = data.concept.join(" ");
-        this.response.speak(string);
-        this.emit(':responseReady');
-        });
-
+            var string = data.concept.join(" ");
+            if (speech == "") {
+                "Search".response.speak(string);
+                "Search".emit(':responseReady');
+            } else {
+                "Search".response.speak(speech);
+                "Search".emit(':responseReady');
+            }});
         //console.log(data.concept[0]);
-        /*this.response.speak(speech);
-        this.emit(':responseReady');*/
+        this.response.speak(speech);
+        this.emit(':responseReady');
     },
     
     'AMAZON.HelpIntent': function () {
