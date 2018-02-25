@@ -72,7 +72,7 @@ function jsonapi (search, callback){
                 complete.code.push(m[i]);
             }
         }
-        complete.is_code=complete.code.length>0;
+        complete.is_code = complete.code.length > 0;
         for(var i=0; i<complete.concept.length;i++){
             while(re2.test(complete.concept[i])){
                 complete.concept[i]=complete.concept[i].replace(re2," ");
