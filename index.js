@@ -169,7 +169,6 @@ const handlers = {
         self.response.speak('It works!');
         //self.response.speak('It works! You said ${string}');
         self.emit(':responseReady');
-        
         });
 
         //console.log(data.concept[0]);
