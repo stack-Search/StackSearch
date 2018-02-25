@@ -1,6 +1,7 @@
 'use strict';
 
 const Alexa = require('alexa-sdk');
+var http = require("http");
 const stackexchange = require('stackexchange-node')
 const aws = require('aws-sdk');
 const twilio_auth_token = 'dedfda4265cc7e3ebd890ce445a7901b'; // is only trial do not worry we know we shouldn't do this
