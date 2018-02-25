@@ -105,19 +105,19 @@ const handlers = {
     // TODO
     'Search': function () {
         const param = this.event.request.intent.slots.stackquery.value;
-        //let speech = "";
+        let fake_speech = "";
 
         // TODO SEARCH
         // TODO SUMMARIZE
 
         // HARDCODED
-        /*
+        
         if (param === "which equals operator should be used in JavaScript comparisons") {
-            speech = "The identity (===) operator behaves identically to the equality (==) operator except no type conversion is done, and the types must be the same to be considered equal.";
+            fake_speech = "The identity (===) operator behaves identically to the equality (==) operator except no type conversion is done, and the types must be the same to be considered equal.";
         } else if (param === "what is the difference between git pull and git fetch") {
-            speech = "In the simplest terms, git pull does a git fetch followed by a git merge. You can do a git fetch at any time to update your remote-tracking branches under refs/remotes/your remote id/.";
+            fake_speech = "In the simplest terms, git pull does a git fetch followed by a git merge. You can do a git fetch at any time to update your remote-tracking branches under refs/remotes/your remote id/.";
         } else if (param === "how do I validate an email address in JavaScript using regex") {
-            speech = "Using regular expressions is probably the best way, I'll text you a link to a code snippet now!";
+           fake_speech = "Using regular expressions is probably the best way, I'll text you a link to a code snippet now!";
             twilioclient.messages
                 .create({
                 to: '+15192398181',
@@ -128,27 +128,28 @@ const handlers = {
                 }```,
             }).then((message) => console.log(message.sid));
         }
-        */
+        if (fake_speech != "") {
+            self.response.speak(fake_speech);
+            self.emit(':responseReady');
+            return;
+        }
         //this is temproary
         const self = this;
+
         jsonapi(param, function (data) {
-            request.post({
-                url: 'https://api.deepai.org/api/summarization',
-                formData: {
-                  'text': data.concept[0],
-                },
-                headers: {
-                    'Api-Key': deepai_api_key,
-                }
-            }, function callback(err, httpResponse, body) {
-                if (err) {
-                    return console.error('request failed:', err);
-                }
-                var response = JSON.parse(body);
-                self.response.speak(response.output);
+        var speech;
+
+                if (data.code != null){
+                    speech = "I'll text you a link to a code snippet now!";
+            twilioclient.messages.create({
+                to: '+15192398181',
+                from: '+12892040756',
+                body: data.code[0]
+                })};
+
+                self.response.speak(data.concept[0]);
                 self.emit(':responseReady');
             });
-      });
         //});
 
         //console.log(data.concept[0]);
