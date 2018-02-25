@@ -1,5 +1,11 @@
 'use strict';
 
+
+var twilio = require('twilio');
+var accountSid = 'AC38758e1348e016394b93c77e680a7bb4'; // Your Account SID from www.twilio.com/console
+var authToken = '13bb8915fd9892d9fbd15b21a589a8ca';   // Your Auth Token from www.twilio.com/console
+var client = new twilio(accountSid, authToken);
+
 const Alexa = require('alexa-sdk');
 const stackexchange = require('stackexchange-node')
 const aws = require('aws-sdk');
@@ -32,8 +38,9 @@ const languageStrings = {
 
 // HELPERS ------------------------------------------------------------------------------------
 
-// Search referrs to the string given
+// Search refers to the string given
 function jsonapi (search, callback){
+    console.log(search);
     var options = { version: 2.2 };
 	var context = new stackexchange(options);
 	var re=/<pre><code>([\s\S]*?)<\/code><\/pre>/gm;
@@ -54,7 +61,6 @@ function jsonapi (search, callback){
 	};
 	context.search.search(filter, function (err, results){
         if (err) throw err;
-        //console.log(results);
         var s;
         for(var i=0;i<results.items[0].answers.length;i++){
             if(results.items[0].answers[i].is_accepted){
@@ -117,6 +123,7 @@ const handlers = {
         // TODO SUMMARIZE
 
         // HARDCODED}
+        /*
         if (param === "which equals operator should be used in JavaScript comparisons") {
             speech = "The identity (===) operator behaves identically to the equality (==) operator except no type conversion is done, and the types must be the same to be considered equal.";
         } else if (param === "what is the difference between git pull and git fetch") {
@@ -135,6 +142,24 @@ const handlers = {
         } else {
             speech = "Sorry, I couldn't find an answer for the query: " + param;
         }
+        */
+
+        jsonapi(param, function (data) {
+            //console.log(data.concept[0]);
+            var PythonShell = require('python-shell');
+            var options = {
+                mode: 'text',
+                scriptPath: './',
+                args: data.concept
+            };
+
+            PythonShell.run('summary.py', options, function (err, results) {
+                if (err) throw err;
+                // results is an array consisting of messages collected during execution
+                console.log(results);
+            });
+        });
+
 
         /* this is temproary
         jsonapi('sort array in javascript', function (data){
@@ -153,6 +178,22 @@ const handlers = {
     console.log(results);
     });
     });*/
+
+            //console.log(data.concept[0]);
+            var PythonShell = require('python-shell');
+            var options = {
+            mode: 'text',
+            scriptPath: './',
+            args: data.concept
+        };
+        
+
+        PythonShell.run('summary.py', options, function (err, results) {
+        if (err) throw err;
+        // results is an array consisting of messages collected during execution
+        console.log(results);
+        });
+        });
         this.response.speak(speech);
         this.emit(':responseReady');
     },
