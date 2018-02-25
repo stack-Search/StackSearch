@@ -133,7 +133,6 @@ const handlers = {
         const self = this;
         jsonapi(param, function (data) {
                             if (data.code != null){
-                    speech = "I'll text you a link to a code snippet now!";
             twilioclient.messages.create({
                 to: '+15192398181',
                 from: '+12892040756',
