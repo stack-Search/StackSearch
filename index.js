@@ -147,6 +147,8 @@ const handlers = {
         */
 
         //this is temproary
+        var self = this;
+
         jsonapi(param, function (data) {
             //console.log(data.concept);
             /*data.concept.unshift(data.title);
@@ -163,8 +165,8 @@ const handlers = {
                 console.log(results);
             });*/
         var string = data.concept.join(" ");
-        this.response.speak('It works! You said ${string}');
-        this.emit(':responseReady');
+        self.response.speak('It works! You said ${string}');
+        self.emit(':responseReady');
         });
 
         //console.log(data.concept[0]);
