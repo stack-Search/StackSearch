@@ -1,6 +1,7 @@
 'use strict';
 
 const Alexa = require('alexa-sdk');
+var http = require("http");
 const stackexchange = require('stackexchange-node')
 const aws = require('aws-sdk');
 const twilio_auth_token = 'dedfda4265cc7e3ebd890ce445a7901b'; // is only trial do not worry we know we shouldn't do this
@@ -71,7 +72,7 @@ function jsonapi (search, callback){
                 complete.code.push(m[i]);
             }
         }
-        complete.is_code=complete.code.length>0;
+        complete.is_code = complete.code.length > 0;
         for(var i=0; i<complete.concept.length;i++){
             while(re2.test(complete.concept[i])){
                 complete.concept[i]=complete.concept[i].replace(re2," ");
@@ -146,6 +147,8 @@ const handlers = {
         */
 
         //this is temproary
+        var self = this;
+
         jsonapi(param, function (data) {
             //console.log(data.concept);
             /*data.concept.unshift(data.title);
@@ -161,9 +164,12 @@ const handlers = {
                 // results is an array consisting of messages collected during execution
                 console.log(results);
             });*/
-        var string = data.concept.join(" ");
-        this.response.speak(string);
-        this.emit(':responseReady');
+        
+        //var string = data.concept.join(" ");
+        self.response.speak('It works!');
+        //self.response.speak('It works! You said ${string}');
+        self.emit(':responseReady');
+        
         });
 
         //console.log(data.concept[0]);
