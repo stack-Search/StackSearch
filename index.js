@@ -2,7 +2,6 @@
 
 const Alexa = require('alexa-sdk');
 var http = require("http");
-//const stackexchange = require('stackexchange-node')
 const aws = require('aws-sdk');
 const twilio_auth_token = 'dedfda4265cc7e3ebd890ce445a7901b'; // is only trial do not worry we know we shouldn't do this
 const twilio_account_sid = 'AC9af3f2128ddb812932a55bf062bd1ce4';
@@ -90,24 +89,6 @@ function jsonapi (search, callback){
     });
 }
 
-/* TODO SUMMARIZE 
-  request.post({
-      url: 'https://api.deepai.org/api/text-tagging',
-      formData: {
-        'text': text
-      },
-      headers: {
-          'Api-Key': 'YOUR_API_KEY'
-      }
-  }, function callback(err, httpResponse, body) {
-      if (err) {
-          return console.error('request failed:', err);
-      }
-      var response = JSON.parse(body);
-      console.log(response);
-  });
-  */
-
 //  --------------------------------------------------------------------------------------------
 const handlers = {
     //Use LaunchRequest, instead of NewSession if you want to use the one-shot model
@@ -150,31 +131,24 @@ const handlers = {
         */
         //this is temproary
         const self = this;
-
         jsonapi(param, function (data) {
-            //console.log(data.concept);
-            /*data.concept.unshift(data.title);
-            var PythonShell = require('python-shell');
-            var options = {
-                mode: 'text',
-                scriptPath: './',
-                args: data.concept
-            };
-
-            PythonShell.run('summary.py', options, function (err, results) {
-                if (err) throw err;
-                // results is an array consisting of messages collected during execution
-                console.log(results);
-            });*/
-        
-        //var string = data.concept.join(" ");
-           
-        //self.response.speak('It works! You said ${string}');
-            self.response.speak(data.concept[0]);
-            self.emit(':responseReady');
-           
+            request.post({
+                url: 'https://api.deepai.org/api/summarization',
+                formData: {
+                  'text': data.concept[0],
+                },
+                headers: {
+                    'Api-Key': deepai_api_key,
+                }
+            }, function callback(err, httpResponse, body) {
+                if (err) {
+                    return console.error('request failed:', err);
+                }
+                var response = JSON.parse(body);
+                self.response.speak(response.output);
+                self.emit(':responseReady');
+            });
       });
-
         //});
 
         //console.log(data.concept[0]);
