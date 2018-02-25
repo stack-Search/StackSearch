@@ -124,8 +124,8 @@ const handlers = {
         // TODO SEARCH
         // TODO SUMMARIZE
 
-        // HARDCODED}
-        /*
+        // HARDCODED
+        
         if (param === "which equals operator should be used in JavaScript comparisons") {
             speech = "The identity (===) operator behaves identically to the equality (==) operator except no type conversion is done, and the types must be the same to be considered equal.";
         } else if (param === "what is the difference between git pull and git fetch") {
@@ -141,39 +141,21 @@ const handlers = {
                     return re.test(String(email).toLowerCase());
                 }```,
             }).then((message) => console.log(message.sid));
-        } else {
-            speech = "Sorry, I couldn't find an answer for the query: " + param;
         }
-        */
-
-        //this is temproary
-        var self = this;
-
-        jsonapi(param, function (data) {
-            //console.log(data.concept);
-            /*data.concept.unshift(data.title);
-            var PythonShell = require('python-shell');
-            var options = {
-                mode: 'text',
-                scriptPath: './',
-                args: data.concept
-            };
-
-            PythonShell.run('summary.py', options, function (err, results) {
-                if (err) throw err;
-                // results is an array consisting of messages collected during execution
-                console.log(results);
-            });*/
         
-        //var string = data.concept.join(" ");
-        self.response.speak('It works!');
-        //self.response.speak('It works! You said ${string}');
-        self.emit(':responseReady');
+        // if predefined, we exit early
+         if (param != "") {
+             this.response.speak(speech);
+             this.emit(':responseReady');
+             return; 
+        }
+        // else we bind the context to the function
+        jsonapi.bind(this);
+        jsonapi(param, function (data) {
+            speech = data.concept.join(" ");
+            this.response.speak(speech);
+            this.emit(':responseReady');
         });
-
-        //console.log(data.concept[0]);
-        /*this.response.speak(speech);
-        this.emit(':responseReady');*/
     },
     
     'AMAZON.HelpIntent': function () {
