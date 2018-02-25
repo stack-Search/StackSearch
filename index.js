@@ -127,7 +127,7 @@ const handlers = {
         // TODO SEARCH
         // TODO SUMMARIZE
 
-        // HARDCODED}
+        // HARDCODED
         /*
         if (param === "which equals operator should be used in JavaScript comparisons") {
             speech = "The identity (===) operator behaves identically to the equality (==) operator except no type conversion is done, and the types must be the same to be considered equal.";
@@ -144,8 +144,6 @@ const handlers = {
                     return re.test(String(email).toLowerCase());
                 }```,
             }).then((message) => console.log(message.sid));
-        } else {
-            speech = "Sorry, I couldn't find an answer for the query: " + param;
         }
         */
         //this is temproary
@@ -180,6 +178,21 @@ const handlers = {
         //console.log(data.concept[0]);
         /*this.response.speak(speech);
         this.emit(':responseReady');*/
+        
+        // if predefined, we exit early
+         i//f (param != "") {
+            // this.response.speak(speech);
+             //this.emit(':responseReady');
+             //return; 
+        //}
+        // else we bind the context to the function
+        //jsonapi.bind(this);
+        //jsonapi(param, function (data) {
+          //  speech = data.concept.join(" ");
+            //this.response.speak(speech);
+            //this.emit(':responseReady');
+        //});
+     //a0dc57e6bab505c2d0a3058105c8e9462c142f3c
     },
     
     'AMAZON.HelpIntent': function () {
