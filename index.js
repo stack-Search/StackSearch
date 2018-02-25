@@ -49,10 +49,12 @@ function jsonapi (search, callback){
   		pagesize: 1,
   		sort: 'relevance',
   		order: 'desc',
-  		intitle: search,
+  		q: search,
   		filter: '!)R7_YdluAAl180(njTbqNhsH'
 	};
-	context.search.search(filter, function (err, results){
+    //console.log(context.search.advanced);
+	context.search.advanced(filter, function (err, results){
+        //console.log(results);
         if (err) throw err;
         var s;
         for(var i=0;i<results.items[0].answers.length;i++){
