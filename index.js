@@ -129,10 +129,9 @@ const handlers = {
         */
         //this is temproary
         const self = this;
-        jsonapi.bind(this);
         jsonapi(param, function (data) {
             request.post({
-                url: 'https://api.deepai.org/api/text-tagging',
+                url: 'https://api.deepai.org/api/summarization',
                 formData: {
                   'text': data.concept[0],
                 },
@@ -144,8 +143,7 @@ const handlers = {
                     return console.error('request failed:', err);
                 }
                 var response = JSON.parse(body);
-                console.log(response);
-                self.response.speak(response);
+                self.response.speak(response.output);
                 self.emit(':responseReady');
             });
       });
