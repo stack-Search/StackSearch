@@ -1,21 +1,13 @@
 'use strict';
 
-
-var twilio = require('twilio');
-var accountSid = 'AC38758e1348e016394b93c77e680a7bb4'; // Your Account SID from www.twilio.com/console
-var authToken = '13bb8915fd9892d9fbd15b21a589a8ca';   // Your Auth Token from www.twilio.com/console
-var client = new twilio(accountSid, authToken);
-
 const Alexa = require('alexa-sdk');
 const stackexchange = require('stackexchange-node')
 const aws = require('aws-sdk');
-const twilio_auth_token = 'dedfda4265cc7e3ebd890ce445a7901b'; // is only trial do not worry I know I shouldn't do this
+const twilio_auth_token = 'dedfda4265cc7e3ebd890ce445a7901b'; // is only trial do not worry we know we shouldn't do this
 const twilio_account_sid = 'AC9af3f2128ddb812932a55bf062bd1ce4';
 const twilioclient = require('twilio')(twilio_account_sid, twilio_auth_token);
-
-var lambda = new aws.Lambda({
-    region: 'us-east-1'
-});
+const deepai_api_key = 'e4402912-b41b-42af-8a76-356f798986c6'; // is also free-tier and as such we do not require this in the future.
+const request = require('request');
 
 const APP_ID = "amzn1.ask.skill.773968b1-1359-4506-80ce-4217a46dad68"; // TODO replace with your app ID (OPTIONAL).
 
@@ -93,13 +85,23 @@ function jsonapi (search, callback){
     });
 }
 
-/* How to call
-jsonapi('sort array in javascript', function (data) {
-  var fs = require('fs');
-  fs.writeFile('./data.json',JSON.stringify(data,null,2));
-});
-
-*/
+/* TODO SUMMARIZE 
+  request.post({
+      url: 'https://api.deepai.org/api/text-tagging',
+      formData: {
+        'text': text
+      },
+      headers: {
+          'Api-Key': 'YOUR_API_KEY'
+      }
+  }, function callback(err, httpResponse, body) {
+      if (err) {
+          return console.error('request failed:', err);
+      }
+      var response = JSON.parse(body);
+      console.log(response);
+  });
+  */
 
 //  --------------------------------------------------------------------------------------------
 const handlers = {

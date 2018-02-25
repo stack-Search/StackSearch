@@ -6,10 +6,13 @@
   "dependencies": {
     "alexa-sdk": "^1.0.25",
     "aws-sdk": "^2.202.0",
+    "node-summary": "^1.2.0",
+    "python-shell": "^0.5.0",
     "stackexchange": "^0.4.0",
     "stackexchange-node": "^1.0.1",
     "travis-encrypt": "github:pwmckenna/node-travis-encrypt",
-    "twilio": "^3.11.3"
+    "twilio": "^3.11.3",
+    "unirest": "^0.5.1"
   },
   "devDependencies": {},
   "scripts": {
