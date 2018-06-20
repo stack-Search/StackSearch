@@ -1,4 +1,4 @@
-# StackSearch [![Build Status](https://travis-ci.org/stack-Search/StackSearch.svg?branch=master)](https://travis-ci.org/stack-Search/StackSearch)
+# StackSearch
 
 StackSearch is a skill for Alexa that integrates the StackOverflow and Twilio API to answer developer's questions hands-free!
 
