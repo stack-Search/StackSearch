@@ -105,13 +105,7 @@ const handlers = {
     // TODO
     'Search': function () {
         const param = this.event.request.intent.slots.stackquery.value;
-        //let speech = "";
-
-        // TODO SEARCH
-        // TODO SUMMARIZE
-
-        // HARDCODED
-        /*
+        let speech = "";
         if (param === "which equals operator should be used in JavaScript comparisons") {
             speech = "The identity (===) operator behaves identically to the equality (==) operator except no type conversion is done, and the types must be the same to be considered equal.";
         } else if (param === "what is the difference between git pull and git fetch") {
@@ -128,7 +122,8 @@ const handlers = {
                 }```,
             }).then((message) => console.log(message.sid));
         }
-        */
+        
+        /*
         //this is temproary
         const self = this;
         jsonapi(param, function (data) {
@@ -142,10 +137,14 @@ const handlers = {
                 self.emit(':responseReady');
             });
         //});
+        */
 
         //console.log(data.concept[0]);
-        /*this.response.speak(speech);
-        this.emit(':responseReady');*/
+        if (speech === "") {
+            speech = "I\'m sorry, I currently do not know ";
+        }
+        this.response.speak(speech);
+        this.emit(':responseReady');
         
         // if predefined, we exit early
          //f (param != "") {
